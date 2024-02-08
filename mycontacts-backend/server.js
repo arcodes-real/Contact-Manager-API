@@ -1,6 +1,9 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const {errorToJson }  = require("./middlewares/errorHandler");
+const {connect} = require("./Config/dbConnection");
+
+connect();
 
 // importing the routes
 const contactsRoute = require("./routes/contact.routes");
