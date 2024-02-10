@@ -3,6 +3,7 @@ const dotenv = require("dotenv").config();
 const {errorToJson }  = require("./middlewares/errorHandler");
 const {connect} = require("./Config/dbConnection");
 
+// CONNECTION TO DATABASE
 connect();
 
 // importing the routes
