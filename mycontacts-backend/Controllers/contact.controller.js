@@ -1,19 +1,21 @@
 // controller contains all the logic to handle requests from the database
-
+const Contact = require("../Models/contact.model");
 const asyncHandler = require("express-async-handler");
 // @desc GET all contacts
 // @route /api/contacts
 // @access public
 
-const getAllContacts = asyncHandler((req, res) =>{
-    res.status(200).json({message: "get all contacts"});
+const getAllContacts = asyncHandler(async (req, res) =>{
+    const contacts = await Contact.find();
+    res.status(200).json(contacts);
 });
 
 // @desc GET contact from :id
 // @route /api/contacts/:id
 // @access public
 
-const getContactFromId = asyncHandler((req, res) =>{
+const getContactFromId = asyncHandler(async (req, res) =>{
+    const contact = await Contact.findById(req.params)
     res.status(200).json({message: `get contact for ${req.params.id}`});
 });
 
@@ -21,7 +23,7 @@ const getContactFromId = asyncHandler((req, res) =>{
 // @route /api/contacts/
 // @access public
 
-const createContact = asyncHandler((req, res) =>{
+const createContact = asyncHandler(async (req, res) =>{
     const {name, email, phone} = req.body;
     // if the user doesn't provide the body inputs ..error handling
     if(!name || !email || !phone){
@@ -29,7 +31,12 @@ const createContact = asyncHandler((req, res) =>{
         throw new Error("All fields are required");
     }
 
-    res.status(201).json({message: "create contacts"});
+    const newContact = await Contact.create({
+        name,
+        email,
+        phone
+    });
+    res.status(201).json(newContact);
 });
 
 // @desc UPDATE contact for id
