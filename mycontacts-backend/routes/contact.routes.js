@@ -5,7 +5,7 @@ const {getAllContacts,
      updateContact, 
      deleteContact} = require("../Controllers/contact.controller");
 
-// CRUD OPS ON CONTACTS
+
 
 // GET all contacts
 router.route("/").get(getAllContacts);
