@@ -65,9 +65,9 @@ const loginUser = async(req, res) => {
 
 // @desc current users info
 // @route POST /api/users/current
-// @access public
+// @access private, you need a valid token to access this route
 const currentUserInfo = async(req, res) => {
-    await res.status(200).json({ message: "Current user information" })
+    res.json(req.user);
 };
  
 module.exports = {registerUsers, loginUser, currentUserInfo};
