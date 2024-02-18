@@ -5,7 +5,11 @@ const {getAllContacts,
      updateContact, 
      deleteContact} = require("../Controllers/contact.controller");
 
+const validateToken =  require("../middlewares/validateTokenHandler");
 
+// making all the routes private/secure
+
+router.use(validateToken);
 
 // GET all contacts
 router.route("/").get(getAllContacts);
